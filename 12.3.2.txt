@@ -1,0 +1,15 @@
+#include <stdio.h>
+ 
+int main()
+{
+  int a, b, x;
+ 
+  printf("What is a going to be?\n");
+  scanf("%d", &a);
+  printf("What is b going to be?\n");
+  scanf("%d", &b);
+ 
+  x = -b / a;
+  printf("The solution of the equation is %d\n ", x);
+  
+}
