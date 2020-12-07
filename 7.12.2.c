@@ -14,9 +14,9 @@ int main()
             sum = 0;
             while(num != 0)
             {
-                rest = num % 10;  // get the last digit of num
-                sum += rest;      // add rem to sum
-                num = num / 10;  // remove the last digit from num
+                rest = num % 10;  
+                sum += rest;      
+                num = num / 10;  
             }
 
             num = sum;
