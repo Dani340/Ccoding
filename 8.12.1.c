@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <math.h>
 int main() {
-    int x, y, z, N, n, primeNr=0, i, j, k, p, sum=0, flag=1;
+    int x, y, z, N, n, primeNr=0, i, j, k, p, sum=0, flag=1, flag1=1;
 
     printf("Enter a number to determine the greatest prime number smaller than x: \n");
     scanf("%d", &x);
@@ -49,24 +49,25 @@ int main() {
         for(k=2; k <= y; k++) {
 
             if(z%k==0) {
-                flag = 0;
+                flag1 = 0;
                 break;
             }
         }
 
         if(z==1)
-        flag=2;
+        flag1=2;
 
         else if(z==2)
-        flag=1;
+        flag1=1;
 
         else if(z<1)
-        flag=0;
+        flag1=0;
 
-        if (flag == 1) {
+        if (flag1 == 1) {
+            sum += z;
             primeNr++;
             z++;
-            sum += z;
+
         }
 
     }
