@@ -1,8 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 int main() {
-    int aInt, bInt,sum=0;
-    char c[1000];
+    int a, b;
     FILE *fptr;
 
     if ((fptr = fopen("adunare.in.txt", "r")) == NULL) {
@@ -10,11 +9,8 @@ int main() {
         exit(1);
     }
 
-    fscanf(fptr, "%[^\n]", c);
-	aInt = atoi(c);
-    fscanf(fptr, "%[^\n]", c);
-	bInt = atoi(c);
-	sum = aInt + bInt;
+    fscanf(fptr, "%d\n", &a);
+    fscanf(fptr, "%d\n", &b);
 	fclose(fptr);
 
     FILE * fout;
@@ -23,6 +19,6 @@ int main() {
         exit(1);
     }
 
-    fprintf(fout,"%d\n",sum);
+    fprintf(fout,"%d\n",a + b);
     fclose(fout);
 }
