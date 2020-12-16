@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 int main() {
-    int N, arr[50]={0}, c;
+    int N, arr[50]={0}, c, x, max;
     FILE *fptr;
 
     if ((fptr = fopen("numere.in.txt", "r")) == NULL) {
@@ -10,12 +10,27 @@ int main() {
     }
 
     fscanf(fptr, "%d\n", &N);
-    for (c = 0; c <= N; c++)
+    for (c = 0; c < N; c++)
     {
-    fscanf(fptr,"%d\n", &arr[c]);
-    arr[c] += arr[c];
+        fscanf(fptr,"%d\n", &x);
+        arr[c] = x;
+    }
+
+    for (c=0; c <= N; c++)
+    {
+        if (arr[c] > max) {
+            max = arr[c];
+        }
     }
 	fclose(fptr);
-	printf("The list is %d", arr[50]);
+
+	FILE * fout;
+     if ((fout = fopen("max.out.txt", "w")) == NULL) {
+        printf("Error! opening file");
+        exit(1);
+    }
+
+    fprintf(fout,"%d\n",max);
+    fclose(fout);
 
 }
