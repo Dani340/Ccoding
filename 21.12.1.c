@@ -22,7 +22,7 @@ int isPrime(int n){
         return 1;
     }
 
-    else {
+    else if (flag != 1) {
         return -1;
     }
 
@@ -42,9 +42,12 @@ int main() {
                 num = num / 10;
                 i = i * 10;
         }
+
+        i = i * num;
         originalnum = originalnum - i;
 
         result = isPrime(originalnum);
+
         if(result == 1) {
             printf("Numarul %d este centru prim", firstn);
         }
