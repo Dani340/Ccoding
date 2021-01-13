@@ -10,8 +10,8 @@ int main()
     scanf("%d", &k);
 
     for(i = 1; i <= n; i++) {
-        x = i;
         if(i % k == 0) {
+            x = i;
             while(x % k == 0) {
                 x = x / k;
                 sum += 1;
