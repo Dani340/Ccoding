@@ -2,20 +2,12 @@
 #define PI 3.14
 float Length(int radius)
 {
-    float length;
-
-    length = PI*radius*2;
-
-    return length;
+    return PI*radius*2;
 }
 
 float Area(int radius)
 {
-    float area;
-
-    area = PI*radius*radius;
-
-    return area;
+    return PI*radius*radius;
 }
 
 
