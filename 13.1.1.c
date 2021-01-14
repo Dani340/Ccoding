@@ -16,7 +16,7 @@ int main()
         sum += n + (k / 7) * (5 * p - 2) + (k % 7) * p;
     }
 
-    else if(k % 7 == 6) {
+    else {
         sum += n + (k / 7) * (5 * p - 2) + (5 * p - 1);
     }
 
