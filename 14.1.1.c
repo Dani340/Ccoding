@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 int main() {
-    float N, arr[50]={}, c, x, y, sum=0.0;
+    int N, c;
+    float x, y, sum=0;
     FILE *fptr;
 
     if ((fptr = fopen("media.in.txt", "r")) == NULL) {
@@ -12,14 +13,14 @@ int main() {
     fscanf(fptr, "%d\n", &N);
     for (c = 0; c < N; c++)
     {
-        fscanf(fptr,"%d\n", &x);
+        fscanf(fptr,"%f\n", &x);
         sum += x;
     }
 
-    sum = sum / 4 * 3;
+    sum = sum / 4.0 * 3.0;
 
-    fscanf(fptr, "%d\n", &y);
-    sum = (sum + y) / 4;
+    fscanf(fptr, "%f\n", &y);
+    sum = (sum + y) / 4.0;
 
 
 	fclose(fptr);
@@ -30,7 +31,7 @@ int main() {
         exit(1);
     }
 
-    fprintf(fout,"%d\n",sum);
+    fprintf(fout,"%f\n",sum);
     fclose(fout);
 
 }
