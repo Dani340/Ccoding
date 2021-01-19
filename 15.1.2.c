@@ -1,7 +1,7 @@
 #include <stdio.h>
 int main()
 {
-    int A, B;
+    int A, B, X, Y;
 
     printf("Enter A: \n");
     scanf("%d", &A);
@@ -9,7 +9,12 @@ int main()
     printf("Enter B: \n");
     scanf("%d", &B);
 
-    printf("A is %d and B is %d", B, A);
+    X = A;
+    Y = B;
+    B = X;
+    A = Y;
+
+    printf("A is %d and B is %d", A, B);
 
     return 0;
 }
