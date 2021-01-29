@@ -11,8 +11,12 @@ int main()
 
     for(i = 0; i < strlen(string1); i++)
     {
-        if(isalpha(string1[i])) {
+        if(isalpha(string1[i]) && string1[i] != 'z') {
             string1[i] += 1;
+        }
+
+        else if(string1[i] == 'z') {
+            string1[i] = 'a';
         }
     }
     printf("After converting the letters to the next one in the alphabet, we get:\n");
