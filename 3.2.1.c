@@ -11,7 +11,7 @@ int main()
 
     for(i = 0; i < strlen(string1); i++)
     {
-        if(isspace(string1[i])) {
+        if(isspace(string1[i]) && isalpha(string1[i-1]) && isalpha(string1[i+1])) {
             count++;
         }
     }
