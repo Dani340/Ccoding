@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdbool.h>
 #include "school.h"
 
 int main() {
@@ -6,7 +7,7 @@ int main() {
 
     printf("Enter your mark: ");
     scanf("%d", &mark);
-    if(Grades(mark) == 1) {
+    if(Grades(mark) == true) {
         printf("You passed!");
     }
 
