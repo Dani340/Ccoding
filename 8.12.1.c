@@ -1,7 +1,10 @@
 #include <stdio.h>
 #include <math.h>
+#include "ClosestPrimeToX.h"
+#include "sumOfPrimes.h"
+
 int main() {
-    int x, N, i, j, sum = 0, primeNr = 0, isPrime;
+    int x, N;
 
     printf("Enter a number to determine the greatest prime number smaller than x: \n");
     scanf("%d", &x);
@@ -9,47 +12,15 @@ int main() {
     scanf("%d", &N);
 
     // pas 1: nr prim mai mic decat x
-    if(x<=1) {
+    if(ClosestPrimeToX(x) == 0) {
         printf("There is no number smaller than x that is prime \n");
-    } else {
-        for(i = x; i > 1; i--) {
-            isPrime = 1;
-
-            for(j = 2; j <= sqrt(i); j++) {
-                if(i % j == 0) {
-                    isPrime = 0;
-                    break;
-                }
-            }
-
-            if (isPrime == 1) {
-                printf("The result is %d \n", i);
-                break;
-            }
-        }
+    }
+    else if(ClosestPrimeToX(x) == i) {
+        printf("The result is %d\n", i);
     }
 
     // pas 2: suma primelor N nr prime mai mari decat x
-    x ++;
-    while (primeNr < N) {
-        isPrime = 1;
+    const sumPrimes = sumOfPrimes(x, N);
+    printf("The sum is %d", sumPrimes);
 
-        if(x > 1) {
-            for(j = 2; j <= sqrt(x); j++) {
-                if(x % j == 0) {
-                    isPrime = 0;
-                    break;
-                }
-            }
-
-            if (isPrime == 1) {
-                primeNr ++;
-                sum += x;
-            }
-        }
-
-        x ++;
-    }
-
-    printf("The sum is %d ", sum);
 }
