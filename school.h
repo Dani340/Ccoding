@@ -1,8 +1,10 @@
+#include <stdbool.h>
+
 int Grades(int mark) {
     if(mark >= 5) {
-        return 1;
+        return true;
     }
     else {
-        return -1;
+        return false;
     }
 }
