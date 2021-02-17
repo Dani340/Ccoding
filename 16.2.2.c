@@ -2,8 +2,8 @@
 
 int main()
 {
-    int matrix[10][10], matrix1[10][10];
-    int i,j,r,c,x,y;
+    int matrix[10][10];
+    int i,j,r,c,x,y,count;
 
     printf("Enter number of rows:");
     scanf("%d",&r);
@@ -26,9 +26,9 @@ int main()
     }
 
     for(i = 0; i < r; i ++) {
-        matrix1[0][1] = matrix[i][x];
+        count = matrix[i][x];
         matrix[i][x] = matrix[i][y];
-        matrix[i][y] = matrix1[0][1];
+        matrix[i][y] = count;
     }
 
     printf("\nMatrix is :\n");
