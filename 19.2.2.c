@@ -23,7 +23,7 @@ int main()
         sum += matrix[i][j];
     }
 
-    printf("Sum of numbers on 1st diag is %d ", sum);
+    printf("Sum of numbers of 1st diag is %d ", sum);
 
     return 0;
 }
