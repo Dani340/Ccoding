@@ -26,7 +26,7 @@ int main()
         }
     }
 
-    printf("Sum of numbers on top of 1st diag is %d ", sum);
+    printf("Sum of numbers beneath the 2nd diag is %d ", sum);
 
     return 0;
 }
