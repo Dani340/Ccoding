@@ -11,6 +11,7 @@ int main()
     printf("\nEnter matrix elements :\n");
     for(i=0;i < r;i++)
     {
+        biggest = -1;
         for(j=0;j < r;j++)
         {
             printf("Enter element [%d,%d] : ",i+1,j+1);
