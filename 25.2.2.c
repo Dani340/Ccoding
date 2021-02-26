@@ -9,8 +9,6 @@ int factorial(int num) {
     }
 }
 
-int factorial(int num);
-
 int main() {
     int number, result;
 
