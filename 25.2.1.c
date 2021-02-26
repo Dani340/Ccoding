@@ -1,21 +1,30 @@
 #include <stdio.h>
+int i = 0;
 
-int printfN(int num) {
+int printfDesc(int num) {
     if (num >= 0) {
         printf("%d\n", num);
-        printfN(num-1);
+        printfDesc(num-1);
     }
 }
 
-int printfN(int num);
+int printfAsc(int num) {
+    if (num >= 0) {
+        printf("%d\n", i);
+        i++;
+        printfAsc(num-1);
+    }
+}
 
 int main() {
-    int number, result;
+    int number;
 
     printf("Enter a number: ");
     scanf("%d", &number);
 
-    printfN(number);
+    printfDesc(number);
+    printf("\n");
+    printfAsc(number);
 
     return 0;
 }
