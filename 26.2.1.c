@@ -3,12 +3,13 @@
 int fibonnaci(int total, int n, int elem1, int elem2) {
     int elem3;
 
-    while (total < n) {
+    if (total < n) {
         elem3 = elem1 + elem2;
         total++;
         printf("%d\n", elem3);
         elem1 = elem2;
         elem2 = elem3;
+        fibonnaci(total, n, elem1, elem2);
    }
 }
 
@@ -31,7 +32,7 @@ int main()
     }
 
     else if(n == 1) {
-        printf("The first number of the Fibonnaci series are \n", n);
+        printf("The first number of the Fibonnaci series is \n", n);
         printf("%d\n", elem1);
     }
 
