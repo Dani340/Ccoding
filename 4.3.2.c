@@ -7,7 +7,7 @@ int main()
     char a[100], b[100];
     char * stra;
     char * strb;
-    int count=0, i=0;
+    int i=0;
 
     printf("Enter the first string: ");
     gets(a);
