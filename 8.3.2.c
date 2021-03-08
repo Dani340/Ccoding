@@ -23,7 +23,7 @@ int main( ) {
     printf("Enter the 2nd point on OY: ");
     scanf("%lf", &point2.Y);
 
-    distance = sqrt((point2.X - point1.X) * (point2.X - point1.X) - (point2.Y - point1.Y) * (point2.Y - point1.Y));
+    distance = sqrt(pow(point2.X - point1.X, 2) + pow(point2.Y - point1.Y, 2));
 
     printf("The distance is: %.2lf", distance);
 
