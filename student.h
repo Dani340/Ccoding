@@ -22,9 +22,12 @@ int look4student(char prenume[], struct student Student[], int N) {
 
     for(int i = 0; i < N; i++) {
         if(strcmp(Student[i].prenume, prenume) == 0) {
-            return -1;
+            return i;
             break;
         }
+    }
+    if(count1 == N) {
+        return -1;
     }
 }
 
@@ -36,19 +39,61 @@ void printstudent(struct student Student[], int i) {
     printf("His/Her mark is %f \n", Student[i].mark);
 }
 
-void removestudent(char X[], struct student Student[], int N) {
-    int i;
+int removestudent(char X[], struct student Student[], int N) {
+    int i, result;
 
-    for(int i = 0; i < N; i++) {
-        if(strcmp(Student[i].prenume, X) == 0) {
-            for (int j = i; j < N - 1; j ++) {
-                Student[j] = Student[j + 1];
-            }
+    result = look4student(X, Student, N);
+    if(result != 0) {
+        for (int j = result; j < N - 1; j ++) {
+            Student[j] = Student[j + 1];
+        }
+        printf("Student removed succesfully \n");
+        return 1;
+    }
+    else {
+        printf("The name of the student is not in the list! \n");
+        return -1;
+    }
+
+}
+
+int changemark(char Y[], struct student Student[], int N) {
+    int i, result;
+    float newmark;
+
+    result = look4student(Y, Student, N);
+    if(result != 0) {
+        printf("The name of the student you entered is in the list, enter the new mark: ");
+        scanf(" %f", &newmark);
+        Student[result].mark = newmark;
+        return 1;
+    }
+
+    else {
+        printf("The name of the student is not in the list! \n");
+        return -1;
+    }
+}
+
+float * biggestlowestmark(struct student Student[], int N) {
+    int i;
+    float biggest, lowest;
+
+    float * BL = (float*) malloc(sizeof(float) * 2);
+
+    biggest = Student[0].mark;
+    lowest = Student[0].mark;
+    for(i = 0; i < N; i++) {
+        if(biggest < Student[i].mark) {
+            biggest = Student[i].mark;
+        }
+        if(lowest > Student[i].mark) {
+            lowest = Student[i].mark;
         }
     }
 
-    for (i = 0; i < N - 1; i++) {
-        printstudent(Student, i);
-        printf("\n");
-    }
+    *BL = biggest;
+    *(BL + 1) = lowest;
+
+    return BL;
 }
