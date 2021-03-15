@@ -4,7 +4,6 @@
 #include "student.h"
 
 int main() {
-    struct student Student1;
     struct student Student[30];
     char prenume[10], X[10], Y[10];
     int i, N, result, remove, change, choice=-1;
@@ -92,11 +91,11 @@ int main() {
             printf("\n");
         }
         else if(choice == 7) {
-            float * orderer = sortbymarks(Student, N);
+            struct student orderer[30] = sortbymarks(Student, N);
 
             printf("Sorted array is: ");
             for (i = 0; i < N; i++) {
-                printf("%f ", orderer[i]);
+                printf("%d with %f", orderer[i].prenume, orderer[i].mark);
             }
             printf("\n \n");
         }
