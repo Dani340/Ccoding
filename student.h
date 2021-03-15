@@ -18,17 +18,12 @@ void addstudent(struct student Student[], int i) {
 }
 
 int look4student(char prenume[], struct student Student[], int N) {
-    int count1 = 0;
-
     for(int i = 0; i < N; i++) {
         if(strcmp(Student[i].prenume, prenume) == 0) {
             return i;
-            break;
         }
     }
-    if(count1 == N) {
-        return -1;
-    }
+    return -1;
 }
 
 void printstudent(struct student Student[], int i) {
@@ -43,7 +38,7 @@ int removestudent(char X[], struct student Student[], int N) {
     int i, result;
 
     result = look4student(X, Student, N);
-    if(result != 0) {
+    if(result >= 0) {
         for (int j = result; j < N - 1; j ++) {
             Student[j] = Student[j + 1];
         }
@@ -51,7 +46,7 @@ int removestudent(char X[], struct student Student[], int N) {
         return 1;
     }
     else {
-        printf("The name of the student is not in the list! \n");
+        printf("The name of the student is not in the list \n");
         return -1;
     }
 
@@ -62,7 +57,7 @@ int changemark(char Y[], struct student Student[], int N) {
     float newmark;
 
     result = look4student(Y, Student, N);
-    if(result != 0) {
+    if(result >= 0) {
         printf("The name of the student you entered is in the list, enter the new mark: ");
         scanf(" %f", &newmark);
         Student[result].mark = newmark;
@@ -96,4 +91,28 @@ float * biggestlowestmark(struct student Student[], int N) {
     *(BL + 1) = lowest;
 
     return BL;
+}
+
+float * sortbymarks(struct student Student[], int N) {
+    int i, j;
+    float count1;
+
+    float * orderer = (float*) malloc(sizeof(float) * N);
+
+    for(i = 0; i < N; i++) {
+        *(orderer + i) = Student[i].mark;
+    }
+
+    for (i = 0; i < N; ++i) {
+        for (j = i + 1; j < N; ++j) {
+            if (*(orderer + i) > *(orderer + j)) {
+                count1 =  *(orderer + i);
+                *(orderer + i) = *(orderer + j);
+                *(orderer + j) = count1;
+            }
+        }
+
+    }
+
+    return orderer;
 }
