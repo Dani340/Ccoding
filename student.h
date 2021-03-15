@@ -93,22 +93,23 @@ float * biggestlowestmark(struct student Student[], int N) {
     return BL;
 }
 
-float * sortbymarks(struct student Student[], int N) {
+struct student[] sortbymarks(struct student Student[], int N) {
     int i, j;
     float count1;
+    struct student orderer[30];
 
-    float * orderer = (float*) malloc(sizeof(float) * N);
+    memcpy(orderer, Student, sizeof(*Student) * N);
 
     for(i = 0; i < N; i++) {
-        *(orderer + i) = Student[i].mark;
+        orderer[i].mark = Student[i].mark;
     }
 
     for (i = 0; i < N; ++i) {
         for (j = i + 1; j < N; ++j) {
-            if (*(orderer + i) > *(orderer + j)) {
-                count1 =  *(orderer + i);
-                *(orderer + i) = *(orderer + j);
-                *(orderer + j) = count1;
+            if (orderer[i].mark > orderer[j].mark) {
+                count1 =  orderer[i].mark;
+                orderer[i].mark = orderer[j].mark;
+                orderer[j].mark = count1;
             }
         }
 
