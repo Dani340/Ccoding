@@ -7,7 +7,7 @@ int main() {
     struct node *head;
     struct node *tort = NULL;
     struct node *bezea = NULL;
-    int count;
+    int count, count1, N;
 
     tort = malloc(sizeof(struct node));
     bezea = malloc(sizeof(struct node));
@@ -20,6 +20,29 @@ int main() {
 
     head = tort;
 
-    count = Linkedlist(head);
-    printf("\nThe length of the linked list is %d", count);
+    count = CountAndPrint(head);
+    printf("\nThe length of the linked list is %d \n", count);
+    printf("\n");
+
+    count1 = CountAndFind(head, bezea);
+    if(count1 >= 0) {
+        printf("The value was found at the %d positon\n", count1+1);
+    }
+    else {
+        printf("The value was not found!\n");
+    }
+    printf("\n");
+
+    printf("Enter a position of the list: ");
+    scanf("%d", &N);
+    count = FindByPosition(head, N);
+
+    if(count >= 0) {
+        printf("\nThe value at the entered position is %d\n", count);
+    }
+    else {
+        printf("\nThere is no value at that position!\n");
+    }
+    printf("\n");
+
 }
