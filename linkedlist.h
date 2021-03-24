@@ -15,11 +15,11 @@ int CountAndPrint(struct node *p) {
     return count;
 }
 
-int CountAndFind(struct node *p, struct node *x) {
+int CountAndFind(struct node *p, int x) {
     int count = 0;
 
     while (p != NULL) {
-        if (p->value == x->value) {
+        if (p->value == x) {
             return count;
             break;
         }
@@ -43,4 +43,33 @@ int FindByPosition(struct node *p, int N) {
     }
     return -1;
 
+}
+
+int addfirstNode(struct node **head, int fvalue) {
+    struct node *firstv;
+
+    firstv = malloc(sizeof(struct node));
+
+    firstv->value = fvalue;
+    firstv->next = (*head);
+    (*head) = firstv;
+
+    printf("Node added!");
+}
+
+int addlastNode(struct node **head, int evalue) {
+    struct node *endv;
+    struct node * p = * head;
+
+    endv = malloc(sizeof(struct node));
+    endv->value = evalue;
+
+    while(p->next != NULL) {
+        p = p -> next;
+    }
+
+    p->next = endv;
+    endv->next = NULL;
+
+    printf("Node added!\n");
 }
