@@ -7,7 +7,7 @@ int main() {
     struct node *head;
     struct node *tort = NULL;
     struct node *bezea = NULL;
-    int count, count1, N;
+    int count, count1, N, x, firstvalue, endvalue;
 
     tort = malloc(sizeof(struct node));
     bezea = malloc(sizeof(struct node));
@@ -20,16 +20,14 @@ int main() {
 
     head = tort;
 
-    count = CountAndPrint(head);
-    printf("\nThe length of the linked list is %d \n", count);
-    printf("\n");
-
-    count1 = CountAndFind(head, bezea);
+    printf("Enter a value: ");
+    scanf("%d", &x);
+    count1 = CountAndFind(head, x);
     if(count1 >= 0) {
-        printf("The value was found at the %d positon\n", count1+1);
+        printf("\nThe value was found at the %d positon\n", count1+1);
     }
     else {
-        printf("The value was not found!\n");
+        printf("\nThe value was not found!\n");
     }
     printf("\n");
 
@@ -45,4 +43,17 @@ int main() {
     }
     printf("\n");
 
+    printf("Enter the value of the node you want to add: ");
+    scanf("%d", &firstvalue);
+    addfirstNode(&head, firstvalue);
+    printf("\n");
+
+    printf("Enter the value of the node you want to add: ");
+    scanf("%d", &endvalue);
+    addlastNode(&head, endvalue);
+    printf("\n");
+
+    count = CountAndPrint(head);
+    printf("\nThe length of the linked list is %d \n", count);
+    printf("\n");
 }
