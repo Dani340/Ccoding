@@ -45,7 +45,7 @@ int FindByPosition(struct node *p, int N) {
 
 }
 
-int addfirstNode(struct node **head, int fvalue) {
+void addfirstNode(struct node **head, int fvalue) {
     struct node *firstv;
 
     firstv = malloc(sizeof(struct node));
@@ -57,7 +57,7 @@ int addfirstNode(struct node **head, int fvalue) {
     printf("Node added!");
 }
 
-int addlastNode(struct node **head, int evalue) {
+void addlastNode(struct node **head, int evalue) {
     struct node *endv;
     struct node * p = * head;
 
@@ -72,4 +72,32 @@ int addlastNode(struct node **head, int evalue) {
     endv->next = NULL;
 
     printf("Node added!\n");
+}
+
+void addNthNode(struct node **head, int val, int N) {
+    struct node *newnode;
+    struct node * p = * head;
+    int i;
+
+    newnode = malloc(sizeof(struct node));
+    newnode->value = val;
+
+    for(i=0; i < N-1; i++) {
+        p = p -> next;
+    }
+
+    newnode->next = p->next;
+    p->next = newnode;
+
+    printf("Node added!\n");
+}
+
+void deletefirstNode(struct node **head) {
+    struct node * p = * head;
+
+    *head = (*head)->next;
+    p->next = NULL;
+    free(p);
+
+    printf("First node deleted!\n");
 }
