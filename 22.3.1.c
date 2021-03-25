@@ -7,7 +7,7 @@ int main() {
     struct node *head;
     struct node *tort = NULL;
     struct node *bezea = NULL;
-    int count, count1, N, x, firstvalue, endvalue;
+    int count, count1, N, Nth, x, firstvalue, endvalue, nvalue;
 
     tort = malloc(sizeof(struct node));
     bezea = malloc(sizeof(struct node));
@@ -51,6 +51,18 @@ int main() {
     printf("Enter the value of the node you want to add: ");
     scanf("%d", &endvalue);
     addlastNode(&head, endvalue);
+    printf("\n");
+
+    printf("Enter the value of the node you want to add: ");
+    scanf("%d", &nvalue);
+
+    printf("Enter the position of the node you want to add: ");
+    scanf("%d", &Nth);
+
+    addNthNode(&head, nvalue, Nth);
+    printf("\n");
+
+    deletefirstNode(&head);
     printf("\n");
 
     count = CountAndPrint(head);
