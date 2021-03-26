@@ -54,7 +54,7 @@ void addfirstNode(struct node **head, int fvalue) {
     firstv->next = (*head);
     (*head) = firstv;
 
-    printf("Node added!");
+    printf("Node added on the first position\n");
 }
 
 void addlastNode(struct node **head, int evalue) {
@@ -71,7 +71,7 @@ void addlastNode(struct node **head, int evalue) {
     p->next = endv;
     endv->next = NULL;
 
-    printf("Node added!\n");
+    printf("Node added on the last position\n");
 }
 
 void addNthNode(struct node **head, int val, int N) {
@@ -89,7 +89,7 @@ void addNthNode(struct node **head, int val, int N) {
     newnode->next = p->next;
     p->next = newnode;
 
-    printf("Node added!\n");
+    printf("Node added on the %d position\n", N);
 }
 
 void deletefirstNode(struct node **head) {
@@ -100,4 +100,31 @@ void deletefirstNode(struct node **head) {
     free(p);
 
     printf("First node deleted!\n");
+}
+
+void deletelastNode(struct node **head) {
+    struct node * p = *head;
+
+    while(p->next->next != NULL) {
+        p = p->next;
+    }
+
+    p->next = NULL;
+    free(p->next);
+
+    printf("Last node deleted!\n");
+}
+
+void deleteNthNode(struct node **head, int N) {
+    struct node * p = *head;
+    int i;
+
+    for(i = 0; i < N-1; i++) {
+        p = p->next;
+    }
+
+    p->next = NULL;
+    free(p->next);
+
+    printf("Last node deleted!\n");
 }
