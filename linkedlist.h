@@ -82,7 +82,7 @@ void addNthNode(struct node **head, int val, int N) {
     newnode = malloc(sizeof(struct node));
     newnode->value = val;
 
-    for(i=0; i < N-1; i++) {
+    for(i=0; i < N; i++) {
         p = p -> next;
     }
 
@@ -126,5 +126,25 @@ void deleteNthNode(struct node **head, int N) {
     p->next = NULL;
     free(p->next);
 
-    printf("Last node deleted!\n");
+    printf("%d node deleted!\n",N);
+}
+
+int deleteNvalNode(struct node **head, int x) {
+
+    struct node * p = *head;
+    int i, count=-1;
+
+    while (p != NULL) {
+        if (p->next->value == x) {
+            p->next = p->next->next;
+            free(p->next);
+            printf("The node with value %d was deleted!\n", x);
+        }
+        else {
+        	p = p->next;
+        	count++;
+        }
+    }
+
+    return count;
 }
