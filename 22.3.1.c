@@ -7,7 +7,7 @@ int main() {
     struct node *head;
     struct node *tort = NULL;
     struct node *bezea = NULL;
-    int count, count1, N, Nth, deleteN, x, firstvalue, endvalue, nvalue;
+    int count, count1, countNval, N, Nth, deleteN, x, deleteNth, firstvalue, endvalue, nvalue;
 
     tort = malloc(sizeof(struct node));
     bezea = malloc(sizeof(struct node));
@@ -69,6 +69,19 @@ int main() {
     printf("Enter the position of the node you want to delete: ");
     scanf("%d", &deleteN);
     deleteNthNode(&head, deleteN);
+    printf("\n");
+
+    count = CountAndPrint(head);
+    printf("\nThe length of the linked list is %d \n", count);
+    printf("\n");
+
+    printf("Enter a value: ");
+    scanf("%d", &deleteNth);
+
+    countNval = deleteNvalNode(&head, deleteNth);
+    if(countNval < 0) {
+        printf("\nThe value was not found!\n");
+    }
     printf("\n");
 
     count = CountAndPrint(head);
