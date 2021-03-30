@@ -75,11 +75,14 @@ int main() {
     printf("\nThe length of the linked list is %d \n", count);
     printf("\n");
 
-    printf("Enter a value: ");
+    printf("Enter a value to delete: ");
     scanf("%d", &deleteNth);
 
     countNval = deleteNvalNode(&head, deleteNth);
-    if(countNval < 0) {
+    if(countNval == 1) {
+        printf("The node with value %d was deleted!\n", x);
+    }
+    else {
         printf("\nThe value was not found!\n");
     }
     printf("\n");
