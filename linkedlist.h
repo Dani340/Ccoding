@@ -64,12 +64,17 @@ void addlastNode(struct node **head, int evalue) {
     endv = malloc(sizeof(struct node));
     endv->value = evalue;
 
-    while(p->next != NULL) {
+    while(p != NULL && p->next != NULL) {
         p = p -> next;
     }
 
-    p->next = endv;
-    endv->next = NULL;
+    if (p != NULL) {
+        p->next = endv;
+        endv->next = NULL;
+    }
+    else {
+        *head = endv;
+    }
 
     printf("Node added on the last position\n");
 }
@@ -82,7 +87,7 @@ void addNthNode(struct node **head, int val, int N) {
     newnode = malloc(sizeof(struct node));
     newnode->value = val;
 
-    for(i=0; i < N; i++) {
+    for(i=0; i < N-1; i++) {
         p = p -> next;
     }
 
@@ -117,14 +122,16 @@ void deletelastNode(struct node **head) {
 
 void deleteNthNode(struct node **head, int N) {
     struct node * p = *head;
+    struct node * mem;
     int i;
 
     for(i = 0; i < N-1; i++) {
         p = p->next;
     }
 
-    p->next = NULL;
-    free(p->next);
+    mem = p->next;
+    p->next = p->next->next;
+    free(mem);
 
     printf("%d node deleted!\n",N);
 }
@@ -132,17 +139,25 @@ void deleteNthNode(struct node **head, int N) {
 int deleteNvalNode(struct node **head, int x) {
 
     struct node * p = *head;
-    int i, count=-1;
+    struct node * mem;
+    int count=-1;
 
-    while (p != NULL) {
-        if (p->next->value == x) {
-            p->next = p->next->next;
-            free(p->next);
-            printf("The node with value %d was deleted!\n", x);
-        }
-        else {
-        	p = p->next;
-        	count++;
+    if(p->value == x) {
+        deletefirstNode(head);
+    }
+    else {
+        while (p != NULL && p->next != NULL) {
+            if (p->next->value == x) {
+                mem = p->next;
+                p->next = p->next->next;
+                free(mem);
+                count = 1;
+                break;
+            }
+            else {
+                p = p->next;
+                count--;
+            }
         }
     }
 
