@@ -10,7 +10,7 @@ int main() {
     struct node *second = NULL;
     struct node *third = NULL;
     struct node *fourth = NULL;
-    int count, countNval, i, j, arr[10];
+    int count, countNval;
 
     first = malloc(sizeof(struct node));
     second = malloc(sizeof(struct node));
@@ -23,32 +23,33 @@ int main() {
     fourth->next = NULL;
     head = first;
 
+    struct node *p = head;
+    struct node *mem;
+
     printf("Enter the first digit for your number: ");
     scanf("%d", &first->value);
-    arr[0] = first->value;
 
     printf("Enter the second digit for your number: ");
     scanf("%d", &second->value);
-    arr[1] = second->value;
 
     printf("Enter the third digit for your number: ");
     scanf("%d", &third->value);
-    arr[2] = third->value;
 
     printf("Enter the fourth digit for your number: ");
     scanf("%d", &fourth->value);
-    arr[3] = fourth->value;
 
-    for(i = 0; i < 3; ++i) {
-        for(j = i+1; j < 3; ++j) {
-            if(arr[i] == arr[j]) {
-                countNval = deleteNvalNode(&head, arr[j]);
-                if(countNval == 1) {
-                    printf("The node with value %d repeated itself, now it's deleted!\n", arr[j]);
-                }
-            }
+
+    while (p != NULL && p -> next != NULL) {
+        if (p->value == p->next->value) {
+            mem = p->next;
+            p->next = p->next->next;
+            free(mem);
+            printf("The node with value %d repeated itself, now it's deleted!\n", p->value);
         }
+        p = p->next;
     }
-    count = CountAndPrint(head);
+
+    count = CountAndPrint(&head);
     printf("\nThe length of the linked list is %d \n", count);
+
 }
