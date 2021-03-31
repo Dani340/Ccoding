@@ -10,7 +10,7 @@ int main() {
     struct node *second = NULL;
     struct node *third = NULL;
     struct node *fourth = NULL;
-    int count, arrbi, rest, i=0, arrdec=0;;
+    int count, i=0, arrdec=0;;
 
     first = malloc(sizeof(struct node));
     second = malloc(sizeof(struct node));
