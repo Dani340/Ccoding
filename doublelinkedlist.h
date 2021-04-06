@@ -40,7 +40,7 @@ int CountAndPrint2x(struct node **head) {
 
 void addfirstNode(struct node **head, int fvalue) {
 
-    struct node* firstnode;
+    struct node * firstnode;
     firstnode = malloc(sizeof(struct node));
 
     firstnode->value = fvalue;
@@ -54,4 +54,55 @@ void addfirstNode(struct node **head, int fvalue) {
     (*head) = firstnode;
 
     printf("Node added on the first position\n");
+}
+
+int addLastNode(struct node **head, int evalue) {
+
+    struct node * endnode;
+    endnode = malloc(sizeof(struct node));
+
+    struct node * p = *head;
+
+    endnode->value = evalue;
+
+    endnode->next = NULL;
+
+    if (*head == NULL) {
+        endnode->prev = NULL;
+        *head = endnode;
+        return -1;
+    }
+
+    while (p->next != NULL)
+        p = p->next;
+
+    p->next = endnode;
+
+    endnode->prev = p;
+
+    printf("Node added on the last position\n");
+}
+
+void addKNode(struct node **head, int val, int K) {
+
+    struct node *newnode;
+    struct node * p = * head;
+    int i;
+
+    newnode = malloc(sizeof(struct node));
+    newnode->value = val;
+
+    for(i=0; i < K-1; i++) {
+        p = p->next;
+    }
+
+    newnode->next = p->next;
+
+    p->next = newnode;
+
+    newnode->prev = p;
+
+    newnode->next->prev = newnode;
+
+    printf("Node added on the %d position\n", K);
 }
