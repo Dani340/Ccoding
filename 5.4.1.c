@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
 #include "doublelinkedlist.h"
 
 int main() {
@@ -39,7 +38,7 @@ int main() {
     printf("Enter the fourth digit for your number: ");
     scanf("%d", &fourth->value);
 
-    count = CountAndPrint(&head);
+    count = CountAndPrint2x(&head);
     printf("\nThe length of the linked list is %d \n", count);
     printf("\n");
 
