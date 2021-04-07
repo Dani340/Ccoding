@@ -43,6 +43,7 @@ int main() {
     struct node *head3 = NULL;
     struct node *p = head;
     struct node *q = head2;
+    struct node *r = head3;
 
     printf("Enter the first number for your 1 list: ");
     scanf("%d", &first->value);
@@ -68,32 +69,66 @@ int main() {
 
     printf("Enter the fourth number for your 2 list: ");
     scanf("%d", &fourth2->value);
+    printf("\n");
 
-    int i = 0;
     while(p != NULL && q != NULL) {
+        struct node *newnode;
+        newnode = malloc(sizeof(struct node));
+        newnode->next = NULL;
+
         if (p->value < q->value) {
-            addNthNode(&head3, p->value, i);
+            newnode->value = p->value;
             p = p->next;
-            i++;
         }
         else {
-            addNthNode(&head3, q->value, i);
+            newnode->value = q->value;
             q = q->next;
-            i++;
+        }
+
+        if (r != NULL) {
+            r->next = newnode;
+            newnode->next = NULL;
+            r = r->next;
+        }
+        else {
+            head3 = newnode;
+            r = head3;
         }
     }
 
     while(p != NULL) {
-        addNthNode(&head3, p->value, i);
-        i++;
+        struct node *newnode;
+        newnode = malloc(sizeof(struct node));
+        newnode->next = NULL;
+
+        newnode->value = p->value;
+        p = p->next;
+
+        if (r != NULL) {
+            r->next = newnode;
+            newnode->next = NULL;
+            r = r->next;
+        }
+
     }
 
     while(q != NULL) {
-        addNthNode(&head3, q->value, i);
-        i++;
+        struct node *newnode;
+        newnode = malloc(sizeof(struct node));
+        newnode->next = NULL;
+
+        newnode->value = q->value;
+        q = q->next;
+
+        if (r != NULL) {
+            r->next = newnode;
+            newnode->next = NULL;
+            r = r->next;
+        }
     }
+
     count = CountAndPrint(&head3);
-    printf("The length of the new list is %d", count);
+    printf("\nThe length of the new list is %d", count);
 
     return 0;
 }
