@@ -106,3 +106,14 @@ void addKNode(struct node **head, int val, int K) {
 
     printf("Node added on the %d position\n", K);
 }
+
+void deletefirstNode(struct node **head) {
+    struct node * p = * head;
+
+    *head = (*head)->next;
+    p->next->prev = NULL;
+    p->next = NULL;
+    free(p);
+
+    printf("First node deleted!\n");
+}
