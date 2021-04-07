@@ -92,19 +92,26 @@ void addKNode(struct node **head, int val, int K) {
     newnode = malloc(sizeof(struct node));
     newnode->value = val;
 
-    for(i=0; i < K-1; i++) {
-        p = p->next;
+    if(K == 0) {
+        addfirstNode(head, val);
+    }
+    else {
+        for(i=0; i < K-1; i++) {
+            p = p->next;
+        }
+
+        newnode->next = p->next;
+
+        p->next = newnode;
+
+        newnode->prev = p;
+
+        newnode->next->prev = newnode;
+
+        printf("Node added on the %d position\n", K);
     }
 
-    newnode->next = p->next;
 
-    p->next = newnode;
-
-    newnode->prev = p;
-
-    newnode->next->prev = newnode;
-
-    printf("Node added on the %d position\n", K);
 }
 
 void deletefirstNode(struct node **head) {
