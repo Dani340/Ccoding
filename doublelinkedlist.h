@@ -124,3 +124,39 @@ void deletefirstNode(struct node **head) {
 
     printf("First node deleted!\n");
 }
+
+void deletelastNode(struct node **head) {
+    struct node * p = *head;
+
+    while(p->next->next != NULL) {
+        p = p->next;
+    }
+
+    p->next = NULL;
+    free(p->next);
+
+    printf("Last node deleted!\n");
+}
+
+void deleteKNode(struct node **head, int K) {
+
+    struct node * p = * head;
+    int i;
+
+    if(K == 0) {
+        deletefirstNode(head);
+    }
+    else {
+        for(i=0; i < K-1; i++) {
+            p = p->next;
+        }
+
+        struct node * q = p->next;
+        p->next = q->next;
+        q->next->prev = p;
+        free(q);
+
+        printf("Node deleted on the %d position\n", K);
+    }
+}
+
