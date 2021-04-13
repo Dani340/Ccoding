@@ -28,6 +28,7 @@ int main() {
     head = first;
 
     struct Node * p = head;
+    struct Node * q = p->next;
 
     printf("Enter the first string for your list: ");
     scanf("%c", &first->value);
@@ -48,15 +49,17 @@ int main() {
     printf("\nThe length of the linked list is %d \n", count);
     printf("\n");
 
-    while(p != NULL && p->next != NULL) {
-
-        if((int)p->value > (int)p->next->value) {
-            rest = p->value;
-            p->value = p->next->value;
-            p->next->value = rest;
+    while(p != NULL) {
+        q = p->next;
+        while(q != NULL) {
+            if((int)q->value < (int)p->value) {
+                rest = p->value;
+                p->value = q->value;
+                q->value = rest;
+            }
+            q = q->next;
         }
         p = p->next;
-
     }
 
     printf("The new list is: ");
