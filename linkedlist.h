@@ -3,11 +3,47 @@ struct node {
   struct node *next;
 };
 
-int CountAndPrint(struct node *p) {
+struct node2 {
+  char value[10];
+  struct node2 *next;
+};
+
+struct Node {
+  char value;
+  struct Node *next;
+};
+
+int CountAndPrint(struct node **head) {
+    struct node * p = * head;
     int count = 0;
 
     while (p != NULL) {
         printf("%d ", p->value);
+        p = p->next;
+        count++;
+    }
+
+    return count;
+}
+
+int CountAndPrintStr(struct node2 *p) {
+    int count = 0;
+
+    while (p != NULL) {
+        printf("%s ", p->value);
+        p = p->next;
+        count++;
+    }
+
+    return count;
+}
+
+int CountAndPrintChar(struct Node **head) {
+    struct Node * p = * head;
+    int count = 0;
+
+    while (p != NULL) {
+        printf("%c ", p->value);
         p = p->next;
         count++;
     }
@@ -162,4 +198,19 @@ int deleteNvalNode(struct node **head, int x) {
     }
 
     return count;
+}
+
+int CircularList(struct node **head) {
+
+    struct node *p = *head;
+
+    while(p != NULL) {
+        if(p->next == *head) {
+            return 0;
+        }
+
+        p = p->next;
+    }
+
+    return -1;
 }
