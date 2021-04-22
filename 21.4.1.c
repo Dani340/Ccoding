@@ -34,40 +34,23 @@ int main() {
     j = 0;
     k = 0;
     printf("The numbers that are in all of the vectors are: ");
-    while(i != n1) {
-        if(k == n3 || j == n2) {
-            break;
+    while(i < n1 && j < n2 && k < n3) {
+        if(v1[i] == v2[j] && v2[j] == v3[k]) {
+            printf("%d ", v3[k]);
+            i++;
+            j++;
+            k++;
         }
-        while(j != n2) {
-            while(k != n3) {
-                if(v1[i] == v2[j] == v3[k]) {
-                    printf("%d ", v2[j]);
-                    printf("%d", i);
-                    i++;
-                    j++;
-                    k++;
-                }
-                else if(v1[i] < v2[j]) {
-                    i++;
-                }
-                else if(v2[j] < v1[i]) {
-                    j++;
-                }
-                else if(v1[i] < v3[k]) {
-                    i++;
-                }
-                else if(v2[j] < v3[k]) {
-                    j++;
-                }
-                else if(v3[k] < v1[i]) {
-                    k++;
-                }
-                else if(v3[k] < v2[j]) {
-                    j++;
-                }
+        else if(v1[i] < v2[j]) {
+            i++;
+        }
+        else if(v2[j] < v3[k]) {
+            j++;
+        }
+        else {
+            k++;
+        }
 
-            }
-        }
     }
 
     return 0;
