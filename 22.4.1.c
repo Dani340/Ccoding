@@ -18,7 +18,7 @@ int main() {
     scanf("%d", &X);
 
     for(i = 0; i < n; i++) {
-        for(j = i+1; j < n; j++) {
+        for(j = n-1; j >= 0; j--) {
             if(abs(X - (v[i] + v[j])) < diff) {
                 diff = abs(X - (v[i] + v[j]));
                 x = v[i];
