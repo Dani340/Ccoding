@@ -6,7 +6,10 @@
 int main() {
     struct stack *p = malloc(sizeof(struct stack));
 
-    p->top = -1;
+    p->top = 2;
+    p->items[0] = 1;
+    p->items[1] = 2;
+    p->items[2] = 3;
 
     if(isFull(p) == true) {
         printf("The list is full!\n");
@@ -22,5 +25,6 @@ int main() {
         printf("The list is not empty\n");
     }
 
+    printAll(p);
 
 }
