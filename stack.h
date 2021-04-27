@@ -22,3 +22,13 @@ bool isFull(struct stack *p) {
         return false;
     }
 }
+
+void printAll(struct stack *p) {
+
+    printf("All of the elements are: ");
+    for (int i = 0; i <= p->top; i++) {
+        printf("%d ", p->items[i]);
+    }
+    printf("\n");
+
+}
