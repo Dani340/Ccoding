@@ -4,6 +4,7 @@
 #include "stack.h"
 
 int main() {
+    int pushval;
     struct stack *p = malloc(sizeof(struct stack));
 
     p->top = 2;
@@ -24,6 +25,12 @@ int main() {
     else {
         printf("The list is not empty\n");
     }
+    printf("\n");
+
+    printf("Enter the value of the new element in the stack: ");
+    scanf("%d", &pushval);
+    push(p, pushval);
+    printf("\n");
 
     printAll(p);
 
