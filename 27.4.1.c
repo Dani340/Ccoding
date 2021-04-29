@@ -9,7 +9,7 @@ int main() {
     struct Node *second = NULL;
     struct Node *third = NULL;
     struct Node *fourth = NULL;
-    int count;
+    int count, pushval;
 
     first = malloc(sizeof(struct Node));
     second = malloc(sizeof(struct Node));
@@ -36,9 +36,22 @@ int main() {
     printf("\n");
 
     if(isEmpty(&top) == true) {
-        printf("The list is empty");
+        printf("The list is empty\n");
     }
     else {
-        printf("The list is not empty");
+        printf("The list is not empty\n");
     }
+    printf("\n");
+
+    printf("Enter the value of the node you want to add: ");
+    scanf("%d", &pushval);
+
+    push(&top, pushval);
+    printf("\n");
+
+    pop(&top);
+    printf("\n");
+
+    peek(&top);
+    printf("\n");
 }
