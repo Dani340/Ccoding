@@ -61,7 +61,7 @@ void pop(struct Node **top) {
         (*top) = (*top)->next;
         p->next = NULL;
 
-        printf("The value %d was deleted from the stack\n", p->value);
+        return p->value;
         free(p);
     }
 }
@@ -78,13 +78,15 @@ void popchar(struct node **top) {
         p = (*top);
         (*top) = (*top)->next;
         p->next = NULL;
+
+        return p->value;
         free(p);
     }
 }
 
 int peek(struct Node **top) {
     if (isEmpty(top) == false) {
-        printf("The top of the list is %d", (*top)->value);
+        return (*top)->value;
     }
     else {
         printf("The list is empty");
