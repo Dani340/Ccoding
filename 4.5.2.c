@@ -18,23 +18,12 @@ int main() {
             i++;
         }
         else if(P[i] == ')') {
-            if(top->value == '(') {
-                popchar(&top);
-                count++;
-            }
-            else {
-                count = 0;
-                break;
+            if (popchar(&top) != '(') {
+                printf("False");
+                return 0;
             }
             i++;
         }
     }
-
-    if(count == 0) {
-        printf("False");
-    }
-    else {
-        printf("True");
-    }
-
+    printf("True");
 }
