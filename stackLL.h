@@ -48,7 +48,7 @@ void pushchar(struct node **top, int value) {
     (*top) = p;
 }
 
-void pop(struct Node **top) {
+int pop(struct Node **top) {
 
     struct Node *p;
     p = malloc(sizeof(struct Node));
@@ -61,12 +61,13 @@ void pop(struct Node **top) {
         (*top) = (*top)->next;
         p->next = NULL;
 
-        return p->value;
+        int x = p->value;
         free(p);
+        return x;
     }
 }
 
-void popchar(struct node **top) {
+char popchar(struct node **top) {
 
     struct node *p;
     p = malloc(sizeof(struct node));
@@ -79,8 +80,9 @@ void popchar(struct node **top) {
         (*top) = (*top)->next;
         p->next = NULL;
 
-        return p->value;
+        int x = p->value;
         free(p);
+        return x;
     }
 }
 
