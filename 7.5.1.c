@@ -34,10 +34,3 @@ int main () {
     displaystr(top);
 }
 
-/* compari cuvantul cu top
-
-daca e identic, faci pop sa il scoti pe tot
-
-repeti asta pana cand top e diferit de cuvantul curent
-
-cand top e diferit, adaugi cuvantul curent in stiva */
