@@ -8,7 +8,8 @@ int main() {
     struct QNode *second = NULL;
     struct QNode *third = NULL;
     struct QNode *fourth = NULL;
-    struct QNode *q = (struct QNode*)malloc(sizeof(struct QNode));
+    struct Queue *q = (struct Queue*)malloc(sizeof(struct Queue));
+    int valueenq;
 
     first = malloc(sizeof(struct QNode));
     second = malloc(sizeof(struct QNode));
@@ -41,5 +42,14 @@ int main() {
     else {
         printf("The list is not empty\n");
     }
+    printf("\n");
+
+    printf("Enter the value you want to add: ");
+    scanf("%d", &valueenq);
+    enQueue(q, valueenq);
+    printf("\n");
+
+    print(q->rear);
+    printf("\n");
 }
 
