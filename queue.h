@@ -34,6 +34,22 @@ void enQueue(struct Queue* q, int value) {
     }
 }
 
+int deQueue(struct Queue* q) {
+
+    if (q->front == NULL) {
+        return -1;
+    }
+
+    struct QNode* p = malloc(sizeof(struct QNode));
+    p = q->front;
+    q->front = q->front->next;
+    p->next = NULL;
+
+    int x = p->value;
+    free(p);
+    return x;
+}
+
 void print(struct QNode* p) {
 
     printf("The list is: ");
@@ -45,5 +61,14 @@ void print(struct QNode* p) {
             printf("%d ", p->value);
             p = p->next;
         }
+    }
+}
+
+int peek(struct Queue* q) {
+    if(q->front == NULL) {
+        return -1;
+    }
+    else {
+        return q->front->value;
     }
 }
