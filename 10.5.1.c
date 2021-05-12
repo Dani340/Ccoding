@@ -9,7 +9,7 @@ int main() {
     struct QNode *third = NULL;
     struct QNode *fourth = NULL;
     struct Queue *q = (struct Queue*)malloc(sizeof(struct Queue));
-    int valueenq;
+    int valueenq, valuedeq, peekval;
 
     first = malloc(sizeof(struct QNode));
     second = malloc(sizeof(struct QNode));
@@ -44,6 +44,14 @@ int main() {
     }
     printf("\n");
 
+    peekval = peek(q);
+    if(peekval = -1) {
+        printf("The list is empty");
+    }
+    else {
+        printf("The value from the front of the queue is %d", peekval);
+    }
+
     printf("Enter the value you want to add: ");
     scanf("%d", &valueenq);
     enQueue(q, valueenq);
@@ -51,5 +59,15 @@ int main() {
 
     print(q->rear);
     printf("\n");
+
+    valuedeq = deQueue(q);
+    if(valuedeq = -1) {
+        printf("The queue is empty\n");
+    }
+    else {
+        printf("The value %d was deleted from the front of the queue\n", valuedeq);
+    }
+    printf("\n");
+
 }
 
