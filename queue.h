@@ -36,7 +36,7 @@ void enQueue(struct Queue* q, int value) {
 
 int deQueue(struct Queue* q) {
 
-    if (q->front == NULL) {
+    if (isEmpty(q) == true) {
         return -1;
     }
 
@@ -65,7 +65,7 @@ void print(struct QNode* p) {
 }
 
 int peek(struct Queue* q) {
-    if(q->front == NULL) {
+    if(isEmpty(q) == true) {
         return -1;
     }
     else {
