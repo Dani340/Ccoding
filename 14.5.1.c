@@ -17,19 +17,19 @@ int main() {
     printf("Enter K: ");
     scanf("%d", &K);
 
-    i = 0;
-    while(i+K-1 < n) {
+    for(i = 0; i+K-1 < n; i++) {
         x = 1;
-        for(j = i; j < i+K; j++) {
-            if(v[j] < 0) {
-                printf("%d ", v[j]);
-                x = v[j];
-            }
+        j = i;
+        while (j < i+K && v[j] > 0) {
+            j++;
+        }
+        if(j != i+K) {
+            printf("%d ", v[j]);
+            x = -1;
         }
         if(x >= 0) {
             printf("0 ");
         }
-        i++;
     }
 
     return 0;
