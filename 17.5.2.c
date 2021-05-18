@@ -4,7 +4,7 @@
 
 char* recursive(char* word, char* reversed, int position) {
     if(position >= 0) {
-        recursive(word, strcat(reversed, &word[position]), position-1);
+        recursive(word, strncat(reversed, &word[position], 1), position-1);
     }
     return reversed;
 }
@@ -13,7 +13,6 @@ int main(int argc, char *argv[])  {
     char word[50];
     char* reversed;
     reversed = malloc (strlen(word) * sizeof (char));
-    int i = 0;
 
     if(argc == 2) {
         strcpy(word, argv[1]);
