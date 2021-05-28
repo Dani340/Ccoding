@@ -62,5 +62,3 @@ int main()
 
     return 0;
 }
-
-//https://www.studymite.com/blog/strings-in-c#read_using_getline//
