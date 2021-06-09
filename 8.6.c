@@ -7,15 +7,18 @@ int main() {
     char s[50];
     int i, j, n, S, sum = 0;
 
-    printf("Enter the number of players in the team FCSpreB: ");
-    scanf("%d", &n);
+    FILE *fptr;
 
-    printf("Enter the amount of money Nea Gigi is working with: ");
-    scanf("%d", &S);
+    if ((fptr = fopen("neagigi.in.txt", "r")) == NULL) {
+        printf("Error! opening file");
+        exit(1);
+    }
 
-    printf("Enter the %d names of the players \n", n);
+    fscanf(fptr, "%d\n", &n);
+    fscanf(fptr, "%d\n", &S);
+
     for(i = 0; i < n; i++) {
-        scanf(" %s", s);
+        fgets(s, 50, fptr);
         for(j = 0; j < strlen(s); j++) {
             if(isalpha(s[j]) != 0) {
                 sum += s[j];
@@ -24,10 +27,13 @@ int main() {
     }
 
     if(sum <= S) {
-        printf("The budget of Nea Gigi can cover all of the expenses");
+        printf("The budget of Nea Gigi can cover all of the expenses\n");
     }
     else {
-        printf("The budget is not enough to cover all of the expenses");
+        printf("The budget is not enough to cover all of the expenses\n");
     }
+    printf("%d", sum);
+
+	fclose(fptr);
 
 }
