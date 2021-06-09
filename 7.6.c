@@ -54,7 +54,6 @@ int main() {
             else {
                 t[x] = (-vA[i] + vB[j] + sqrt(pow(vA[i] - vB[j], 2) + 2*(aA[i] - aB[j])*(xB[j] - xA[i]))) / (aA[i] - aB[j]);
             }
-            printf("%f", t[x]);
             x++;
         }
     }
