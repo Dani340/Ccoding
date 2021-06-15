@@ -33,7 +33,6 @@ int main() {
                 strcpy(rime[i], (lastword + k));
                 break;
             }
-            printf("%s ", rime[i]);
         }
 
     }
