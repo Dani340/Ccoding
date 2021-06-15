@@ -9,7 +9,8 @@ int main() {
     int i, x, k, n;
     int res[40];
     const char s = ' ';
-    char* token, *lastword;
+    char* token;
+    char* lastword;
 
     FILE *fptr;
 
@@ -23,17 +24,17 @@ int main() {
         fgets(S, 75, fptr);
         token = strrchr(S, s);
         lastword = token + 1;
-        printf("%s", lastword);
 
         x = strlen(lastword)-3;
 
         for(k = x; k >= 0; k--) {
-            if(lastword[x] != 'a' || lastword[x] != 'e' || lastword[x] != 'i' || lastword[x] != 'o' || lastword[x] != 'u') {
-                rime[i] = lastword + k;
+            if(lastword[x] == 'a' || lastword[x] == 'e' || lastword[x] == 'i' || lastword[x] == 'o' || lastword[x] == 'u') {
+                printf("%s", lastword+k);
+                strcpy(rime[i], (lastword + k));
                 break;
             }
+            printf("%s ", rime[i]);
         }
-        printf("%s ", rime[i]);
 
     }
 
