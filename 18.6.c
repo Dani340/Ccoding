@@ -79,7 +79,7 @@ int main() {
             fatajos.valW = fatajos.val;
             fatajos.val = re;
         }
-        else if(dir[p] == 87) {
+        else if(dir[p] == 86) {
             j--;
             re = fatajos.valE;
             fatajos.valE = fatajos.val;
