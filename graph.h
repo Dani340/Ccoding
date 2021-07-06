@@ -1,3 +1,5 @@
+#include "C:\Users\danielp\OneDrive\Documents\C.Exercises apr\queue.h"
+
 struct AdjListNode {
     int val;
     struct AdjListNode* next;
@@ -10,6 +12,7 @@ struct AdjList {
 struct Graph {
     int n;
     struct AdjList* array;
+    int* visited;
 };
 
 struct AdjListNode* newAdjListNode(int value) {
@@ -21,25 +24,26 @@ struct AdjListNode* newAdjListNode(int value) {
     return newNode;
 }
 
-struct Graph* createGraph(int arr[]) {
+struct Graph* createGraph(int arr[], int length) {
     int i, n;
     n = arr[0];
 
     i = 1;
-    while(arr[i] != '\0') {
+    for(i = 0; i < length; i++) {
         if(arr[i] > n) {
             n = arr[i];
         }
-        i++;
     }
 
     struct Graph* graph = (struct Graph*) malloc(sizeof(struct Graph));
     graph->n = n;
 
     graph->array = (struct AdjList*) malloc(n * sizeof(struct AdjList));
+    graph->visited = (int*) malloc(n * sizeof(int));
 
     for (i = 0; i <= n; i++) {
         graph->array[i].head = NULL;
+        graph->visited[i] = 0;
     }
 
     return graph;
@@ -68,6 +72,33 @@ void printGraph(struct Graph* graph) {
                 p = p->next;
             }
             printf("\n");
+        }
+    }
+}
+
+void BFS(struct Graph* graph, int varfin) {
+    int varfac, varfadi;
+    struct Queue* q = malloc(sizeof(struct Queue));
+    q->front = NULL;
+    q->rear = NULL;
+
+    graph->visited[varfin] = 1; // primul varf este trecut ca vazut
+    enQueue(q, varfin); // este adaugat in coada
+
+    while (isEmpty(q) == false) { // repetam procesul pana cand se termina varfurile din coada
+        varfac = deQueue(q);
+        printf("%d ", varfac); // pt ca este deja trecut ca vazut si este scos, este afisat varful ac
+
+        struct AdjListNode* p = graph->array[varfac].head; // pointer la inceputul arrayului varfurilor adiacente celui actual (varfac)
+
+        while (p != NULL) {
+            varfadi = p->val;
+
+            if (graph->visited[varfadi] == 0) { // daca nu este deja trecut varful adiacent ca vazut, se adauga in coada si este trecut ca vazut
+                graph->visited[varfadi] = 1;
+                enQueue(q, varfadi);
+            }
+            p = p->next; // pointerul merge pana la finalul listei de varfuri adiacente
         }
     }
 }
