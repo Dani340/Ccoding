@@ -102,3 +102,20 @@ void BFS(struct Graph* graph, int varfin) {
         }
     }
 }
+
+void DFS(struct Graph* graph, int varfin) {
+    int varfadi;
+    struct AdjListNode* p = graph->array[varfin].head;
+
+    graph->visited[varfin] = 1;
+    printf("%d ", varfin);
+
+    while (p != NULL) {
+        varfadi = p->val;
+
+        if (graph->visited[varfadi] == 0) {
+            DFS(graph, varfadi);
+        }
+        p = p->next;
+    }
+}
