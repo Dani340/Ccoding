@@ -1,4 +1,4 @@
-#include "C:\Users\danielp\OneDrive\Documents\C.Exercises apr\queue.h"
+#include "C:\Users\danil\OneDrive\Documents\C.Exercises apr\queue.h"
 
 struct AdjListNode {
     int val;
@@ -119,3 +119,39 @@ void DFS(struct Graph* graph, int varfin) {
         p = p->next;
     }
 }
+
+bool isCycleAux(struct Graph* graph, int varf, int par) {
+    int varfadi;
+    struct AdjListNode* p = graph->array[varf].head;
+
+    graph->visited[varf] = 1;
+
+    while(p != NULL) {
+        varfadi = p->val;
+        if (graph->visited[varfadi] == 0) {
+           if (isCycleAux(graph, varfadi, varf)) {
+              return true;
+           }
+        }
+
+        else if (varfadi != par) {
+           return true;
+        }
+    }
+
+    return false;
+}
+
+bool isCycle(struct Graph* graph) {
+    for (int n = 0; n <= graph->n; n++) {
+        if (graph->visited[n] == 0) {
+            if (isCycleAux(graph, n, -1) == true) {
+                return true;
+            }
+        }
+    }
+
+    return false;
+}
+
+
