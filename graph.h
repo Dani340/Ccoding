@@ -1,3 +1,5 @@
+#include "C:\Users\danielp\OneDrive\Documents\C.Exercises apr\queue.h"
+
 struct AdjListNode {
     int val;
     struct AdjListNode* next;
@@ -135,6 +137,8 @@ bool isCycleAux(struct Graph* graph, int varf, int par) {
         else if (varfadi != par) {
            return true;
         }
+
+        p = p->next;
     }
 
     return false;
