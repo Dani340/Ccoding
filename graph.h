@@ -1,5 +1,3 @@
-#include "C:\Users\danil\OneDrive\Documents\C.Exercises apr\queue.h"
-
 struct AdjListNode {
     int val;
     struct AdjListNode* next;
