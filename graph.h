@@ -1,3 +1,5 @@
+#include "C:\Users\danielp\OneDrive\Documents\C.Exercises apr\queue.h"
+
 struct AdjListNode {
     int val;
     struct AdjListNode* next;
@@ -11,6 +13,7 @@ struct Graph {
     int n;
     struct AdjList* array;
     int* visited;
+    int* path;
 };
 
 struct AdjListNode* newAdjListNode(int value) {
@@ -38,10 +41,12 @@ struct Graph* createGraph(int arr[], int length) {
 
     graph->array = (struct AdjList*) malloc(n * sizeof(struct AdjList));
     graph->visited = (int*) malloc(n * sizeof(int));
+    graph->path = (int*) malloc(n * sizeof(int));
 
     for (i = 0; i <= n; i++) {
         graph->array[i].head = NULL;
         graph->visited[i] = 0;
+        graph->path[i] = 0;
     }
 
     return graph;
@@ -148,6 +153,35 @@ bool isCycle(struct Graph* graph) {
             if (isCycleAux(graph, n, -1) == true) {
                 return true;
             }
+        }
+    }
+
+    return false;
+}
+
+bool isPath(struct Graph* graph, int varfin, int v, int n) {
+    int varfadi, i;
+    struct AdjListNode* p = graph->array[varfin].head;
+
+    graph->visited[varfin] = 1;
+
+    while (p != NULL) {
+        varfadi = p->val;
+        if(varfadi == v) {
+            for(i = 0; i < n; i++) {
+                printf("%d ", graph->path[i]);
+            }
+            return true;
+        }
+        else {
+            if (graph->visited[varfadi] == 0) {
+                graph->path[n] = varfadi;
+                n++;
+                if(isPath(graph, varfadi, v, n) == true) {
+                    return true;
+                }
+            }
+            p = p->next;
         }
     }
 
