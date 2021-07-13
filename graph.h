@@ -1,3 +1,5 @@
+#include "C:\Users\danielp\OneDrive\Documents\C.Exercises apr\queue.h"
+
 struct AdjListNode {
     int val;
     struct AdjListNode* next;
@@ -59,6 +61,13 @@ void addEdge(struct Graph* graph, int src, int dest) {
     newNode = newAdjListNode(src);
     newNode->next = graph->array[dest].head;
     graph->array[dest].head = newNode;
+}
+
+void addEdgeDir(struct Graph* graph, int src, int dest) {
+    struct AdjListNode* newNode = newAdjListNode(dest);
+
+    newNode->next = graph->array[src].head;
+    graph->array[src].head = newNode;
 }
 
 void printGraph(struct Graph* graph) {
@@ -186,6 +195,34 @@ bool isPath(struct Graph* graph, int varfin, int v, int n) {
     return false;
 }
 
+bool isPathCheck(struct Graph* graph, int varfin, int v) {
+    int varfadi, i;
+    struct AdjListNode* p = graph->array[varfin].head;
+
+    graph->visited[varfin] = 1;
+
+    if(varfin == v) {
+        return true;
+    }
+
+    while (p != NULL) {
+        varfadi = p->val;
+        if(varfadi == v) {
+            return true;
+        }
+        else {
+            if (graph->visited[varfadi] == 0) {
+                if(isPathCheck(graph, varfadi, v) == true) {
+                    return true;
+                }
+            }
+            p = p->next;
+        }
+    }
+
+    return false;
+}
+
 bool isShortPath(struct Graph* graph, int varfin, int v) {
     int varfadi, varfac, i, n = 0;
     struct Queue* q = malloc(sizeof(struct Queue));
@@ -222,4 +259,21 @@ bool isShortPath(struct Graph* graph, int varfin, int v) {
     }
 
     return false;
+}
+
+void checkPaths(struct Graph* graph, int v) {
+    int n, count = 0, arr[20];
+
+    for(n = 0; n <= graph->n; n++) {
+        if(isPathCheck(graph, n, v) == false) {
+            count++;
+            arr[count-1] = n;
+        }
+        graph->visited[n] = 0;
+    }
+
+    printf("\n%d\n", count);
+    for(n = 0; n < count; n++) {
+        printf("%d ", arr[n]);
+    }
 }
