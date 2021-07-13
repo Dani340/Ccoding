@@ -1,3 +1,5 @@
+#include "C:\Users\danielp\OneDrive\Documents\C.Exercises apr\queue.h"
+
 struct AdjListNode {
     int val;
     struct AdjListNode* next;
@@ -186,4 +188,40 @@ bool isPath(struct Graph* graph, int varfin, int v, int n) {
     return false;
 }
 
+bool isShortPath(struct Graph* graph, int varfin, int v) {
+    int varfadi, varfac, i, n = 0;
+    struct Queue* q = malloc(sizeof(struct Queue));
+    q->front = NULL;
+    q->rear = NULL;
 
+
+    graph->visited[varfin] = 1;
+    enQueue(q, varfin);
+
+    while (isEmpty(q) == false) {
+        varfac = deQueue(q);
+
+        struct AdjListNode* p = graph->array[varfac].head;
+
+        while (p != NULL) {
+            varfadi = p->val;
+            if(varfadi == v) {
+                for(i = 0; i < n; i++) {
+                    printf("%d ", graph->path[i]);
+                }
+                return true;
+            }
+
+            if (graph->visited[varfadi] == 0) {
+                graph->visited[varfadi] = 1;
+                enQueue(q, varfadi);
+
+                graph->path[n] = varfadi;
+                n++;
+            }
+            p = p->next;
+        }
+    }
+
+    return false;
+}
