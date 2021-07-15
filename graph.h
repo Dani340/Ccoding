@@ -1,5 +1,7 @@
+#include "C:\Users\danil\OneDrive\Documents\C.Exercises apr\queue.h"
+
 struct AdjListNode {
-    int val;
+    int val, weight;
     struct AdjListNode* next;
 };
 
@@ -18,6 +20,16 @@ struct AdjListNode* newAdjListNode(int value) {
     struct AdjListNode* newNode = (struct AdjListNode*) malloc(sizeof(struct AdjListNode));
 
     newNode->val = value;
+    newNode->next = NULL;
+
+    return newNode;
+}
+
+struct AdjListNode* newAdjListNodeWeight(int value, int weight) {
+    struct AdjListNode* newNode = (struct AdjListNode*) malloc(sizeof(struct AdjListNode));
+
+    newNode->val = value;
+    newNode->weight = weight;
     newNode->next = NULL;
 
     return newNode;
@@ -68,6 +80,17 @@ void addEdgeDir(struct Graph* graph, int src, int dest) {
     graph->array[src].head = newNode;
 }
 
+void addEdgeWeight(struct Graph* graph, int src, int dest, int weight) {
+    struct AdjListNode* newNode = newAdjListNodeWeight(dest, weight);
+
+    newNode->next = graph->array[src].head;
+    graph->array[src].head = newNode;
+
+    newNode = newAdjListNodeWeight(src, weight);
+    newNode->next = graph->array[dest].head;
+    graph->array[dest].head = newNode;
+}
+
 void printGraph(struct Graph* graph) {
     int n;
 
@@ -81,6 +104,19 @@ void printGraph(struct Graph* graph) {
             }
             printf("\n");
         }
+    }
+}
+
+void printGraphWeight(struct Graph* graph) {
+    int n;
+
+    for (n = 0; n <= graph->n; n++) {
+        struct AdjListNode* p = graph->array[n].head;
+        while (p != NULL) {
+            printf("%d -> %d (%d)\t", n, p->val, p->weight);
+            p = p->next;
+        }
+        printf("\n");
     }
 }
 
@@ -274,4 +310,104 @@ void checkPaths(struct Graph* graph, int v) {
     for(n = 0; n < count; n++) {
         printf("%d ", arr[n]);
     }
+}
+
+void checkPathsWeight(struct Graph* graph, int k) {
+    int n, i, j, o, count = 0, varf, lowest;
+    struct AdjListNode* p;
+    bool bool1 = false;
+    int *path[50];
+    for (i = 0; i < 50; i++) {
+        path[i] = (int *)malloc(20 * sizeof(int));
+    }
+    int *mod;
+    mod = (int *)malloc(50 * sizeof(int));
+    int *num;
+    num = (int *)malloc(50 * sizeof(int));
+
+    for(n = 0; n <= graph->n; n++) {
+        for(i = n + 1; i <= graph->n; i++) {
+            p = graph->array[n].head;
+            while(p != NULL) {
+                varf = p->val;
+                if(varf == i) {
+                    bool1 = true;
+                    if(p->weight < k) {
+                        p->weight += k;
+                        count++;
+                    }
+                    break;
+                }
+            }
+            if(bool1 == false) {
+                for(o = 0; o < 50; o++) {
+                    for(j = 0; j < 20; j++) {
+                        path[o][j] = 0;
+                    }
+                }
+                for(o = 0; o < 50; o++) {
+                    mod[o] = 0;
+                }
+                num = 0;
+                findAllPaths(graph, n, i, path, mod, num, 0, k);
+                for(o = 0; o < *num; o++) {
+                    if(mod[o] < lowest) {
+                        lowest = o;
+                    }
+                }
+                //in acest punct ar trb sa avem indexul pathului cu cele mai putine mod necesare, iar acum ar trb sa le facem
+            }
+        }
+    }
+
+}
+
+void findAllPaths(struct Graph* graph, int varfin, int v, int **path, int *mod, int *i, int j, int k) {
+    struct AdjListNode* p;
+    int varfadi, n;
+
+    graph->visited[varfin] = 1;
+    path[*i][j] = varfin;
+    j++;
+
+    if (varfin == v) {
+        i++;
+    }
+    else {
+        p = graph->array[varfin].head;
+        while(p != NULL) {
+            varfadi = p->val;
+            if (graph->visited[varfadi] == 0) {
+                if(p->weight < k) {
+                    mod[*i]++;
+                }
+                findAllPaths(graph, varfadi, v, path, mod, i, j, k);
+            }
+            p = p->next;
+        }
+    }
+
+    j--;
+    graph->visited[varfin] = 0;
+}
+
+void CityBuy(struct Graph* graph) {
+    int n, varfadi, count = 0;
+
+    for (n = 0; n <= graph->n; n++) {
+        struct AdjListNode* p = graph->array[n].head;
+        while (p != NULL) {
+            varfadi = p->val;
+            if(graph->visited[n] == 0) {
+                count++;
+                graph->visited[n] = 1;
+            }
+            else if(graph->visited[varfadi] == 0) {
+                count++;
+                graph->visited[varfadi] = 1;
+            }
+            p = p->next;
+        }
+    }
+    printf("There are %d cities which can be bought", count);
 }
