@@ -1,3 +1,5 @@
+#include "C:\Users\danil\OneDrive\Documents\C.Exercises apr\queue.h"
+
 struct AdjListNode {
     int val, weight;
     struct AdjListNode* next;
@@ -308,6 +310,29 @@ void checkPaths(struct Graph* graph, int v) {
     for(n = 0; n < count; n++) {
         printf("%d ", arr[n]);
     }
+}
+
+bool checkPathsDirected(struct Graph* graph) {
+    int n, v, i;
+
+    for(n = 0; n <= graph->n; n++) {
+        for(v = n+1; v <= graph->n; v++) {
+            if(isPathCheck(graph, n, v) == false) {
+                return false;
+            }
+            for (i = 0; i <= graph->n; i++) {
+                graph->visited[i] = 0;
+            }
+            if(isPathCheck(graph, v, n) == false) {
+                return false;
+            }
+            for (i = 0; i <= graph->n; i++) {
+                graph->visited[i] = 0;
+            }
+        }
+    }
+
+    return true;
 }
 
 void checkPathsWeight(struct Graph* graph, int k) {
