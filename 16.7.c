@@ -37,8 +37,6 @@ int main() {
         addEdgeDir(graph, src[i], dest[i]);
     }
 
-    printGraph(graph);
-
     if(checkPathsDirected(graph) == true) {
         printf("true");
     }
