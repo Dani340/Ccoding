@@ -1,4 +1,4 @@
-#include "C:\Users\danil\OneDrive\Documents\C.Exercises apr\queue.h"
+#include "\queue.h"
 
 struct node {
     int value;
