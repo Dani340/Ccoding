@@ -1,5 +1,3 @@
-#include "\queue.h"
-
 struct node {
     int value;
     struct node* left;
@@ -27,41 +25,65 @@ void printBTree(struct node* root) {
     printBTree(root->right);
 }
 
-struct node* insertNode(struct node* root, int value) {
-    struct node* p = (struct node*)malloc(sizeof(struct node));
-
-    if (root == NULL) {
-        root = newNode(value);
-        return root;
+int height(struct node* node)
+{
+    if (node==NULL) {
+        return 0;
     }
+    else {
+        int lheight = height(node->left);
+        int rheight = height(node->right);
 
-    struct Queue* q = malloc(sizeof(struct Queue));
-    q->front = NULL;
-    q->rear = NULL;
-
-    enQueue(q, root->value);
-
-    while (isEmpty(q) == false) {
-        node* temp = q.front(); // aici in mod normal pe g4g asta ar scrie (C++), inteleg ce face, banuiesc ca toate datele nodului din front (->left, ->right, ->value) sunt acum in temp
-                                // insa eu nu pot face asta pt ca eu cand dau enqueue singurul lucru pe care il stie despre nodul meu este valoarea, care nu ma ajuta cu nimic, imi trb si left si right
-        deQueue(q);
-
-        if (p->left != NULL) {
-            enQueue(q, p->left->value);
+        if (lheight > rheight) {
+            return(lheight+1);
         }
         else {
-            p->left = newNode(value);
-            return root;
-        }
-
-        if (p->right != NULL) {
-            enQueue(q, p->right->value);
-        }
-        else {
-            p->right = newNode(value);
-            return root;
+            return(rheight+1);
         }
     }
 }
+
+int insertNode(struct node* root, int level, int value)
+{
+    if (root == NULL) {
+        return 0;
+    }
+    if (level == 1) {
+        if (root->left == NULL) {
+            root->left = newNode(value);
+            return root->value;
+        }
+
+        else if (root->right == NULL) {
+            root->right = newNode(value);
+            return root->value;
+        }
+
+    }
+    else if (level > 1) {
+        int result1 = insertNode(root->left, level-1, value);
+        if(result1 != -1) {
+            return result1;
+        }
+        int result2 = insertNode(root->right, level-1, value);
+        if(result2 != -1) {
+            return result2;
+        }
+    }
+}
+
+int levelOrder(struct node* root, int value) {
+    int h = height(root);
+    int i, x;
+
+    for (i = 1; i <= h; i++) {
+        x = insertNode(root, i, value);
+        if(x != 0) {
+            return x;
+        }
+    }
+}
+
+
 
 
