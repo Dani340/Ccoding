@@ -22,7 +22,9 @@ int main() {
     printBTree(root);
     printf("\n");
 
-    insertNode(root, value);
+    int result = levelOrder(root, value);
+    printf("%d\n", result);
+
     printBTree(root);
 
     return 0;
