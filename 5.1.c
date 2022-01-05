@@ -4,7 +4,7 @@
 #include <ctype.h>
 #include <stdbool.h>
 
-int zana(int mat[100][100], int n, int m, int i, int j, int *x, int *y) {
+void zana(int mat[100][100], int n, int m, int i, int j, int *x, int *y) {
     if (i >= n || j >= m) {
         return;
     }
@@ -17,7 +17,8 @@ int zana(int mat[100][100], int n, int m, int i, int j, int *x, int *y) {
             (*y)++;
         }
         return;
-    } else {
+    }
+    else {
         return zana(mat, n, m, i, j+1, x, y);
         return zana(mat, n, m, i+1, j, x, y);
     }
