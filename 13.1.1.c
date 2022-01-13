@@ -1,26 +1,74 @@
 #include <stdio.h>
-int main()
-{
-    int n, k, i, p, sum=0;
+#include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
 
-    printf("Enter the initial length of the nose: \n");
-    scanf("%d", &n);
+int main() {
+    int i = 0, n, k, c, ic = 0, auxc, r, aux, sum = 0, sumc = 0, max = -1;
+    int sir[75], csir[150];
+    char *kstr, *nstr, *sirstr;
+    char S[75];
+    const char s[2] = " ";
+    FILE *fptr;
 
-    printf("Enter cm per work day: \n");
-    scanf("%d", &p);
-
-    printf("Enter days of measurement: \n");
-    scanf("%d", &k);
-
-    if(k % 7 != 6) {
-        sum += n + (k / 7) * (5 * p - 2) + (k % 7) * p;
+    if ((fptr = fopen("sir9i.in.txt", "r")) == NULL) {
+        printf("Error! opening file");
+        exit(1);
     }
 
-    else {
-        sum += n + (k / 7) * (5 * p - 2) + (5 * p - 1);
+    fgets(S, 10, fptr);
+    nstr = strtok(S, s);
+    n = atoi(nstr);
+
+    kstr = strtok(NULL, s);
+    k = atoi(kstr);
+
+    fgets(S, 75, fptr);
+    sirstr = strtok(S, s);
+    c = strlen(sirstr);
+    ic += c;
+    sir[0] = atoi(sirstr);
+    aux = sir[0];
+    auxc = ic;
+
+    while(aux != 0) {
+        r = aux % 10;
+        csir[auxc-1] = r;
+        auxc--;
+        aux = aux / 10;
     }
 
-    printf("His nose is now %d cm long", sum);
+    for(i = 1; i < n; i++) {
+        sirstr = strtok(NULL, s);
+        c = strlen(sirstr);
+        ic += c;
+        sir[i] = atoi(sirstr);
+        aux = sir[i];
+
+        auxc = ic;
+        while(aux != 0) {
+            r = aux % 10;
+            csir[auxc-1] = r;
+            auxc--;
+            aux = aux / 10;
+        }
+    }
+
+    for(i = 0; i < n; i++) {
+        sum = 0;
+        if(i < n-2) {
+            sum = sir[i] + sir[i+1] + sir[i+2];
+        }
+        if(sum > max) {
+            max = sum;
+        }
+    }
+
+    for(i = 0; i < k; i++) {
+        sumc += csir[i];
+    }
+
+    printf("%d\n%d", max, sumc);
 
     return 0;
 }
