@@ -1,25 +1,52 @@
 #include <stdio.h>
-int main()
-{
-    char string1[100];
-    int  i;
+#include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
 
-    printf("Enter a word or a sentence: ");
-    gets(string1);
+int main() {
+    int i, x, sum = 0, nr, p = 1, bool1;
+    char *nstr, *kstr, *sirstr;
+    char S[75];
+    const char s[2] = " ";
+    FILE *fptr;
 
-    i=0;
-    while(string1[i]!='\0')
-    {
-        if(string1[i]=='a' ||string1[i]=='e' ||string1[i]=='i' ||string1[i]=='o' ||string1[i]=='u') {
-            string1[i]=string1[i]-32;
-        }
-
-        else {
-            string1[i] = tolower(string1[i]);
-        }
-
-        i++;
+    if ((fptr = fopen("antiterra.in.txt", "r")) == NULL) {
+        printf("Error! opening file");
+        exit(1);
     }
-    printf("After converting vowels into upper case the sentence becomes:\n");
-    puts(string1);
+
+    fgets(S, 100, fptr);
+    nstr = strtok(S, s);
+
+    while(nstr != NULL) {
+        p = 1;
+        nr = 0;
+        for(i = strlen(nstr)-1; i >= 0; i--) {
+            if(i == strlen(nstr)-1) {
+                if(nstr[i] == '-') {
+                    bool1 = 0;
+                }
+                else {
+                    bool1 = 1;
+                }
+            }
+
+            if(isdigit(nstr[i])) {
+                nr += p*(nstr[i]-48);
+                p *= 10;
+            }
+        }
+        if(bool1 == 0) {
+            sum -= nr;
+        }
+        else {
+            sum += nr;
+        }
+
+        nstr = strtok(NULL, s);
+    }
+
+    printf("%d", sum);
+
+    return 0;
 }
