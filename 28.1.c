@@ -3,7 +3,7 @@
 #include <stdbool.h>
 #include <string.h>
 #include <ctype.h>
-#include "C:\Users\danil\OneDrive\Documents\C.Exercises apr\stackLL.h"
+#include "stackLL.h"
 
 int main() {
     struct node *top;
