@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-#include <minmax.h>
 
 int main() {
     int i, j, n, x, y, nr1, nr2;
