@@ -1,42 +1,46 @@
 #include <stdio.h>
-#include <stdbool.h>
-
-int produs(int X, int Y) {
-    return X * Y;
-}
-
-int produsIfPoz(int X, int Y) {
-    int PozOrNeg(int X) {
-        if(X >= 0) {
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
-    if(PozOrNeg(X) == true || PozOrNeg(Y) == true){
-        return X * Y;
-    }
-}
+#include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
+#include <minmax.h>
 
 int main() {
-    int X, Y;
+    int i, j, n, x, y, nr1, nr2;
+    char *nstr, *xstr, *ystr;
+    char S[75];
+    const char s[2] = " ";
+    FILE *fptr;
 
-    printf("Enter X: \n");
-    scanf("%d", &X);
-
-    printf("Enter Y: \n");
-    scanf("%d", &Y);
-
-    int produsXY = produs(X, Y);
-    printf("The multiplication of X and Y is %d \n", produsXY);
-
-    if(produsIfPoz(X, Y) == X * Y) {
-        printf("%d", X * Y);
+    if ((fptr = fopen("crioac.in.txt", "r")) == NULL) {
+        printf("Error! opening file");
+        exit(1);
     }
 
-    else {
-        printf("Both X and Y are negative");
+    fgets(S, 100, fptr);
+    nstr = strtok(S, s);
+    n = atoi(nstr);
+
+    xstr = strtok(NULL, s);
+    x = atoi(xstr);
+
+    ystr = strtok(NULL, s);
+    y = atoi(ystr);
+
+    nr1 = n/x+1;
+    nr2 = n/y+1;
+
+    printf("%d\n", min(nr1, nr2));
+
+    j = n-y;
+    for(i = x-1; i < n; i += x) {
+        if(i == j) {
+            printf("%d", i+1);
+            return 0;
+        }
+        j -= y;
     }
 
+    printf("0");
+
+    return 0;
 }
