@@ -1,61 +1,82 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
-int main()
-{
-    int matrix[10][10];
-    int i, j, r, c, m, n, count, biggestm = -1, lowestm = 99, biggestn = -1, lowestn = 99;
+int main() {
+    int i, j, t, x, mat[100][100], c, l, n;
+    char *tstr, *nstr, *lstr, *cstr;
+    char S[100];
+    const char s[2] = " ";
+    FILE *fptr;
 
-    printf("Enter number of rows:");
-    scanf("%d",&r);
-    printf("Enter number of cols:");
-    scanf("%d",&c);
+    if ((fptr = fopen("matzeb.in.txt", "r")) == NULL) {
+        printf("Error! opening file");
+        exit(1);
+    }
 
-    printf("\nEnter matrix elements :\n");
-    for(i=0;i < r;i++)
-    {
-        for(j=0;j < c;j++)
-        {
-            printf("Enter element [%d,%d] : ",i+1,j+1);
-            scanf("%d",&matrix[i][j]);
+    fgets(S, 20, fptr);
+    tstr = strtok(S, s);
+    t = atoi(tstr);
+
+    if(t == 1) {
+        nstr = strtok(NULL, s);
+        n = atoi(nstr);
+    }
+    else {
+        lstr = strtok(NULL, s);
+        l = atoi(lstr);
+
+        cstr = strtok(NULL, s);
+        c = atoi(cstr);
+
+        if(l > c) {
+            n = l;
+        }
+        else {
+            n = c;
         }
     }
 
-    printf("The sa elements are: ");
-    for(i = 0; i < r; i++) {
-        for(j = 0; j < c; j++) {
-            for(m = 0; m < r; m++) {
-                if(matrix[m][j] > biggestm) {
-                    biggestm = matrix[m][j];
-                }
-                else if(matrix[m][j] < lowestm) {
-                    lowestm = matrix[m][j];
-                }
+    for(j = 0; j < n; j++) {
+        if(j % 2 == 0) {
+                mat[0][j] = (j+1) * (j+1);
+        }
+        else {
+            mat[0][j] = mat[0][j-1] + 1;
+        }
+    }
+    for(j = n-1; j > 0; j--) {
+        if(j % 2 == 0) {
+            for(i = 1; i <= j; i++) {
+                mat[i][j] = mat[i-1][j] - 1;
             }
 
-            for(n = 0; n < c; n++) {
-                if(matrix[i][n] > biggestn) {
-                    biggestn = matrix[i][n];
-                }
-                else if(matrix[i][n]) {
-                    lowestn = matrix[i][n];
-                }
+            for(x = j-1; x >= 0; x--) {
+                mat[j][x] = mat[j][x+1] - 1;
             }
-            if(matrix[i][j] == biggestm && matrix[i][j] == lowestn || matrix[i][j] == lowestm && matrix[i][j] == biggestn) {
-                printf("%d ", matrix[i][j]);
-                count++;
+        }
+        else {
+            for(i = 1; i <= j; i++) {
+                mat[i][j] = mat[i-1][j] + 1;
+            }
+
+            for(x = j-1; x >= 0; x--) {
+                mat[j][x] = mat[j][x+1] + 1;
             }
         }
     }
-    printf("\nThere are %d sa elements", count);
 
-    printf("\nMatrix is :\n");
-    for(i=0;i < r;i++)
-    {
-        for(j=0;j < c;j++)
-        {
-            printf("%d",matrix[i][j]);
+    if(t == 1) {
+        for(i = 0; i < n; i++) {
+            for(j = 0; j < n; j++) {
+                printf("%d ", mat[i][j]);
+            }
+            printf("\n");
         }
-        printf("\n");
     }
+    else {
+        printf("%d", mat[l-1][c-1]);
+    }
+
     return 0;
 }
