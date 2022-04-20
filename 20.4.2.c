@@ -1,55 +1,54 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
-#include "linkedlist.h"
+#include <string.h>
+#include <stdbool.h>
 
 int main() {
-    struct Node *head;
-    struct Node *first = NULL;
-    struct Node *second = NULL;
-    struct Node *third = NULL;
-    struct Node *fourth = NULL;
-    int count, i=0, arrdec=0;;
+    int i, j, a = 1, count = 1, max = 0, p[100], h[100], n;
+    bool bool1;
+    char *nstr, *pstr, *hstr;
+    char S[100];
+    const char s[2] = " ";
+    FILE *fptr;
 
-    first = malloc(sizeof(struct node));
-    second = malloc(sizeof(struct node));
-    third = malloc(sizeof(struct node));
-    fourth = malloc(sizeof(struct node));
-
-    first->next = second;
-    second->next = third;
-    third->next = fourth;
-    fourth->next = NULL;
-    head = first;
-
-    struct Node *p = head;
-
-    printf("Enter the first digit for your number: ");
-    scanf(" %c", &first->value);
-
-    printf("Enter the second digit for your number: ");
-    scanf(" %c", &second->value);
-
-    printf("Enter the third digit for your number: ");
-    scanf(" %c", &third->value);
-
-    printf("Enter the fourth digit for your number: ");
-    scanf(" %c", &fourth->value);
-
-    while (p != NULL) {
-        if(p->value >='0' && p->value <= '9') {
-            p->value = p->value - 48; //char-dec//
-        }
-        else if(p->value >= 'A' && p->value <= 'F') {
-            p->value = p->value - 55;
-        }
-
-        arrdec += p->value * pow(16, i);
-        p = p->next;
-        i++;
+    if ((fptr = fopen("domino2.in.txt", "r")) == NULL) {
+        printf("Error! opening file");
+        exit(1);
     }
 
-    printf("The converted number from hexadecimal is %d", arrdec);
-    printf("\n");
-}
+    fgets(S, 5, fptr);
+    nstr = strtok(S, s);
+    n = atoi(nstr);
 
+    for(i = 0; i < n; i++) {
+        fgets(S, 10, fptr);
+        pstr = strtok(S, s);
+        p[i] = atoi(pstr);
+
+        hstr = strtok(NULL, s);
+        h[i] = atoi(hstr);
+    }
+
+    for(i = 0; i < n; i++) {
+        if(i + 1 != n) {
+            if(p[i] + h[i] > p[i+1]) {
+                count++;
+            }
+            else {
+                a++;
+                if(count > max) {
+                    max = count;
+                }
+                count = 1;
+            }
+        }
+    }
+
+    if(count > max) {
+        max = count;
+    }
+
+    printf("%d %d", a, max);
+
+    return 0;
+}
